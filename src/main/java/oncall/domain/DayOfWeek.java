@@ -2,7 +2,10 @@ package oncall.domain;
 
 import oncall.exception.ExceptionMessage;
 
+import java.util.List;
+
 public enum DayOfWeek {
+
     MONDAY("월", 0),
     TUESDAY("화", 1),
     WEDNESDAY("수", 2),
@@ -18,8 +21,8 @@ public enum DayOfWeek {
         this.number = number;
     }
 
-    public Integer getNumber() {
-        return number;
+    public String getInfo() {
+        return info;
     }
 
     public static DayOfWeek getDayOfWeekWithInfo(String info) {
@@ -44,6 +47,15 @@ public enum DayOfWeek {
         int newIndex = (this.number + diff) % 7;
         return findDayOfWeekWithNumber(newIndex);
     }
+
+    public Boolean isWeekend() {
+        List<DayOfWeek> weekendList = List.of(DayOfWeek.SATURDAY, DayOfWeek.SUNDAY);
+        if (weekendList.contains(this)) {
+            return true;
+        }
+        return false;
+    }
+
 
 }
 
