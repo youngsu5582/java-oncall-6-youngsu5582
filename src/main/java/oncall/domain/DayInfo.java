@@ -11,6 +11,10 @@ public class DayInfo {
         return startDayofWeek;
     }
 
+    public Integer getCurrentMonth() {
+        return currentMonth;
+    }
+
     public DayInfo(Integer month, DayOfWeek dayOfWeek) {
         validateMonth(month);
         this.currentMonth = month;
