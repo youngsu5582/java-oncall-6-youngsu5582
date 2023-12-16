@@ -28,24 +28,28 @@ public class CallGenerator {
     }
 
     public List<Call> process() {
-        //최대 날짜 계산
         Integer maxDay = dayCalculator.getMaxDayInCurrentMonth();
-        //현재 달
         Integer month = dayCalculator.getCurrentMonth();
+        createCallProcesses(maxDay, month);
+        return callList;
+    }
+
+    private void createCallProcesses(Integer maxDay, Integer month) {
         for (int dayCount = 1; dayCount <= maxDay; dayCount++) {
             Day day = new Day(month, dayCount);
             DayOfWeek dayOfWeek = dayCalculator.calculateDayOfWeekWithDay(dayCount);
             TodayStatus todayStatus = TodayStatus.getStatus(day, dayOfWeek);
-            String worker = null;
-            if (todayStatus == TodayStatus.WEEKDAY) {
-                worker = getWeekdayWorker();
-            } else {
-                worker = getWeekendWorker();
-            }
+            String worker = getWorkerWithStatus(todayStatus);
 
             callList.add(new Call(day, dayOfWeek, todayStatus, worker));
         }
-        return callList;
+    }
+
+    private String getWorkerWithStatus(TodayStatus todayStatus) {
+        if (todayStatus == TodayStatus.WEEKDAY) {
+            return getWeekdayWorker();
+        }
+        return getWeekendWorker();
     }
 
     private String getWeekdayWorker() {
