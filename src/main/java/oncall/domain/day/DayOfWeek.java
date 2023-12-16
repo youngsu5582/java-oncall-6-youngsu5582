@@ -44,7 +44,7 @@ public enum DayOfWeek {
     }
 
     public DayOfWeek getDayOfWeekWithDiff(Integer diff) {
-        int newIndex = (this.number + diff) % 7;
+        int newIndex = (this.number + diff) % DayOfWeek.values().length;
         return findDayOfWeekWithNumber(newIndex);
     }
 
