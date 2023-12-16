@@ -36,5 +36,11 @@ public class DayInfoTest {
                 .hasMessageContaining(ExceptionMessage.INVALID_FORMAT.getMessage())
                 .isInstanceOf(IllegalArgumentException.class);
     }
+//    @ParameterizedTest
+//    @DisplayName("해당 요일이 주말인지 알려준다.")
+//    @ValueSource(classes = {DayOfWeek.SATURDAY,DayOfWeek.SUNDAY})
+//    void isWeekend(){
+//
+//    }
 }
 
