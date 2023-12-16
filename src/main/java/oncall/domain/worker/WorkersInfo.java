@@ -1,4 +1,4 @@
-package oncall.domain;
+package oncall.domain.worker;
 
 import oncall.exception.ExceptionMessage;
 import oncall.util.Constant;

@@ -1,6 +1,6 @@
 package oncall.service;
 
-import oncall.domain.Day;
+import oncall.domain.day.Day;
 import oncall.repository.SpecialDayRepository;
 
 import java.util.List;

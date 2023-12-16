@@ -1,4 +1,4 @@
-package oncall.domain;
+package oncall.domain.day;
 
 public class Day {
     public Integer month;

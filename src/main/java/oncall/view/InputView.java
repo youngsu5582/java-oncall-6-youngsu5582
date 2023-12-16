@@ -1,10 +1,11 @@
 package oncall.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import oncall.domain.DayInfo;
-import oncall.domain.DayOfWeek;
-import oncall.domain.WorkerRoll;
-import oncall.domain.WorkersInfo;
+import oncall.domain.day.DayInfo;
+import oncall.domain.day.DayOfWeek;
+import oncall.domain.worker.WorkerRoll;
+import oncall.domain.worker.WorkersInfo;
+import oncall.util.Constant;
 import oncall.util.Parser;
 import oncall.util.Validator;
 import oncall.view.message.InputViewMessage;
@@ -34,7 +35,7 @@ public class InputView {
         System.out.print(InputViewMessage.EMERGENCY.getMessage());
         String dayInfo = readInput();
         Validator.validateInfoWithPattern(dayInfo);
-        List<String> dayInfoList = Parser.parseInfoWithSeparator(dayInfo, ",");
+        List<String> dayInfoList = Parser.parseInfoWithSeparator(dayInfo, Constant.SEPARATOR);
         Integer month = Parser.parseInfoToNumber(dayInfoList.get(0));
         DayOfWeek dayOfWeek = DayOfWeek.getDayOfWeekWithInfo(dayInfoList.get(1));
         return new DayInfo(month, dayOfWeek);
@@ -50,7 +51,7 @@ public class InputView {
         System.out.print(InputViewMessage.WEEKDAY.getMessage());
         String weekdayInfo = readInput();
         Validator.validateInfoWithPattern(weekdayInfo);
-        List<String> weekdayWorkerNicknames = Parser.parseInfoWithSeparator(weekdayInfo, ",");
+        List<String> weekdayWorkerNicknames = Parser.parseInfoWithSeparator(weekdayInfo, Constant.SEPARATOR);
         return new WorkersInfo(weekdayWorkerNicknames);
     }
 

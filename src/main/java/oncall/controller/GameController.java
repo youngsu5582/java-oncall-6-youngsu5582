@@ -1,9 +1,9 @@
 package oncall.controller;
 
 import oncall.ApplicationStatus;
-import oncall.domain.Call;
-import oncall.domain.DayInfo;
-import oncall.domain.WorkerRoll;
+import oncall.domain.call.Call;
+import oncall.domain.day.DayInfo;
+import oncall.domain.worker.WorkerRoll;
 import oncall.util.CallGenerator;
 import oncall.util.DayCalculator;
 import oncall.view.InputView;
@@ -29,7 +29,7 @@ public class GameController {
     }
 
     public void service() {
-        ApplicationStatus applicationStatus = progress(ApplicationStatus.EMERGENCY_MONTH); // 초기 설정
+        ApplicationStatus applicationStatus = progress(ApplicationStatus.EMERGENCY_MONTH);
         while (applicationStatus.playable()) {
             applicationStatus = progress(applicationStatus);
         }
@@ -45,30 +45,28 @@ public class GameController {
     }
 
     private void initializeGameGuide() {
-        gameGuide.put(ApplicationStatus.EMERGENCY_MONTH, this::emergency);
-        gameGuide.put(ApplicationStatus.ONCALL_MEMBER, this::oncallMember);
-        gameGuide.put(ApplicationStatus.ONCALL_RESULT, this::oncallResult);
+        gameGuide.put(ApplicationStatus.EMERGENCY_MONTH, this::dayInfoSetup);
+        gameGuide.put(ApplicationStatus.ONCALL_MEMBER, this::workerSetup);
+        gameGuide.put(ApplicationStatus.ONCALL_RESULT, this::callSetup);
         gameGuide.put(ApplicationStatus.APPLICATION_EXIT, this::exit);
     }
 
-    private ApplicationStatus emergency() {
+    private ApplicationStatus dayInfoSetup() {
         DayInfo dayInfo = inputView.inputDayInfo();
         this.dayCalculator = new DayCalculator(dayInfo);
         return ApplicationStatus.ONCALL_MEMBER;
     }
 
-    private ApplicationStatus oncallMember() {
+    private ApplicationStatus workerSetup() {
         WorkerRoll workerRoll = inputView.inputWorkerRoll();
         this.workerRoll = workerRoll;
         return ApplicationStatus.ONCALL_RESULT;
     }
 
-    private ApplicationStatus oncallResult() {
+    private ApplicationStatus callSetup() {
         CallGenerator callGenerator = new CallGenerator(this.dayCalculator, this.workerRoll);
         List<Call> callList = callGenerator.process();
-        for (Call call : callList) {
-            System.out.println(call);
-        }
+        outputView.printCallResult(callList);
         return ApplicationStatus.APPLICATION_EXIT;
     }
 

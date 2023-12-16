@@ -1,5 +1,9 @@
 package oncall.view;
 
+import oncall.domain.call.Call;
+
+import java.util.List;
+
 public class OutputView {
     private static OutputView INSTANCE = null;
     private static final String ERROR_PREFIX = "[ERROR] ";
@@ -21,6 +25,11 @@ public class OutputView {
 
     public void printErrorMessage(String errorMessage) {
         printMessage(ERROR_PREFIX + errorMessage);
+    }
+    public void printCallResult(List<Call> callList){
+        for (Call call : callList) {
+            System.out.println(call);
+        }
     }
 
 }

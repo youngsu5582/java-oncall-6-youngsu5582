@@ -1,4 +1,4 @@
-package oncall.domain;
+package oncall.domain.day;
 
 import oncall.exception.ExceptionMessage;
 
@@ -55,7 +55,5 @@ public enum DayOfWeek {
         }
         return false;
     }
-
-
 }
 

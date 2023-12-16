@@ -1,7 +1,7 @@
 package oncall.util;
 
-import oncall.domain.DayInfo;
-import oncall.domain.DayOfWeek;
+import oncall.domain.day.DayInfo;
+import oncall.domain.day.DayOfWeek;
 
 import java.util.List;
 

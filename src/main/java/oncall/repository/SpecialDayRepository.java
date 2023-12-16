@@ -1,6 +1,6 @@
 package oncall.repository;
 
-import oncall.domain.Day;
+import oncall.domain.day.Day;
 
 import java.util.ArrayList;
 import java.util.List;

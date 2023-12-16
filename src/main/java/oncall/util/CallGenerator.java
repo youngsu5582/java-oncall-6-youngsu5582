@@ -1,6 +1,10 @@
 package oncall.util;
 
 import oncall.domain.*;
+import oncall.domain.call.Call;
+import oncall.domain.day.Day;
+import oncall.domain.day.DayOfWeek;
+import oncall.domain.worker.WorkerRoll;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -33,9 +37,6 @@ public class CallGenerator {
             DayOfWeek dayOfWeek = dayCalculator.calculateDayOfWeekWithDay(dayCount);
             TodayStatus todayStatus = TodayStatus.getStatus(day, dayOfWeek);
             String worker = null;
-            if (dayCount == 7) {
-                System.out.println(todayStatus);
-            }
             if (todayStatus == TodayStatus.WEEKDAY) {
                 worker = getWeekdayWorker();
             } else {
@@ -52,7 +53,7 @@ public class CallGenerator {
             return weekdayQueue.poll();
         }
         String workerName = this.workerRoll.getWeekdayWorker(weekdayCount);
-        if (callList.size() != 0 && callList.get(callList.size() - 1).getWorkerName().equals(workerName)) {
+        if (isSameWorker(workerName)) {
             weekdayCount = (weekdayCount + 1) % workerSize;
             weekdayQueue.add(workerName);
             workerName = this.workerRoll.getWeekdayWorker(weekdayCount);
@@ -66,7 +67,7 @@ public class CallGenerator {
             return weekendQueue.poll();
         }
         String workerName = this.workerRoll.getWeekendWorker(weekendCount);
-        if (callList.size() != 0 && callList.get(callList.size() - 1).getWorkerName().equals(workerName)) {
+        if (isSameWorker(workerName)) {
             weekendCount = (weekendCount + 1) % workerSize;
             weekendQueue.add(workerName);
             workerName = this.workerRoll.getWeekendWorker(weekendCount);
@@ -74,6 +75,13 @@ public class CallGenerator {
 
         weekendCount = (weekendCount + 1) % workerSize;
         return workerName;
+    }
+
+    public boolean isSameWorker(String workerName) {
+        if (callList.size() != 0 && callList.get(callList.size() - 1).getWorkerName().equals(workerName)) {
+            return true;
+        }
+        return false;
     }
 
 

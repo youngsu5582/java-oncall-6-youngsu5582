@@ -1,5 +1,7 @@
 package oncall.domain;
 
+import oncall.domain.day.Day;
+import oncall.domain.day.DayOfWeek;
 import oncall.repository.SpecialDayRepository;
 
 

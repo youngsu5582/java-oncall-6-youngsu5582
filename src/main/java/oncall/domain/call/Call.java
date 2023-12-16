@@ -1,4 +1,8 @@
-package oncall.domain;
+package oncall.domain.call;
+
+import oncall.domain.TodayStatus;
+import oncall.domain.day.Day;
+import oncall.domain.day.DayOfWeek;
 
 public class Call {
     private Day day;
