@@ -6,9 +6,18 @@ import oncall.repository.SpecialDayRepository;
 
 
 public enum TodayStatus {
-    WEEKDAY,
-    WEEKEND,
-    SPECIAL;
+    WEEKDAY(""),
+    WEEKEND(""),
+    SPECIAL("휴일");
+    private final String info;
+
+    TodayStatus(String info) {
+        this.info = info;
+    }
+
+    public String getInfo() {
+        return info;
+    }
 
     public static TodayStatus getStatus(Day day, DayOfWeek dayOfWeek) {
         if (SpecialDayRepository.isSpecialDay(day))

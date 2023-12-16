@@ -21,15 +21,11 @@ public class Call {
     public String toString() {
         Integer month = this.day.month;
         Integer date = this.day.date;
-        String dayOfWeekStr = this.dayOfWeek.getInfo();
+        String dayOfWeekInfo = this.dayOfWeek.getInfo();
+        String statusInfo = this.todayStatus.getInfo();
         String workerName = this.workerName;
 
-        String statusStr = "";
-        if (this.todayStatus == TodayStatus.SPECIAL) {
-            statusStr = "(휴일)";
-        }
-
-        return String.format("%d월 %d일 %s%s %s", month, date, dayOfWeekStr, statusStr, workerName);
+        return String.format("%d월 %d일 %s%s %s", month, date, dayOfWeekInfo, statusInfo, workerName);
     }
 
 
