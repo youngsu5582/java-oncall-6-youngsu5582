@@ -37,6 +37,6 @@ public class WorkerRoll {
         if (sortedList1.equals(sortedList2)) {
             return;
         }
-        throw new IllegalStateException(ExceptionMessage.INVALID_FORMAT.getMessage());
+        throw new IllegalArgumentException(ExceptionMessage.INVALID_FORMAT.getMessage());
     }
 }
